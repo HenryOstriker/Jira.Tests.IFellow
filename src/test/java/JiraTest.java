@@ -3,18 +3,20 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+
 import static PageObject.PageSteps.HeaderElementsSteps.*;
 import static PageObject.PageSteps.NewTaskWindowElementsSteps.*;
 import static PageObject.PageSteps.ProfilePageElementsSteps.getDisplayedUsername;
 import static PageObject.PageSteps.ProjectPageElementsSteps.*;
 import static PageObject.PageSteps.TaskPageElementsSteps.*;
+import static com.codeborne.selenide.Selenide.sleep;
 import static utils.Configuration.getConfigurationValue;
 
 public final class JiraTest extends WebHooks {
     private static final String PROJECT_NAME_WITH_CODE = "Test (TEST)";
     private static final String PROJECT_NAME = "Test";
     private static final String VERSION = "Version 2.0";
-    private static final String TASK_NAME = "Новая таска с багом";
+    private static final String TASK_NAME = "Шеф, все пропало!";
 
     @Test
     @DisplayName("Авторизация пользователя.")
@@ -49,24 +51,29 @@ public final class JiraTest extends WebHooks {
         searchTask("TEST-21967");
 
         Assertions.assertTrue(getTaskStatus().length() > 0, "Статус задачи не задан.");
-        Assertions.assertEquals(VERSION, getFixInVersion(), "Версия для исправления не соответствует " + VERSION);
+        Assertions.assertEquals(VERSION, getFixInVersion(), "Версия не соответствует " + VERSION);
     }
 
     @Test
-    @DisplayName("Создание задачи и проверка возможности смены статуса.")
+    @DisplayName("Создание задачи и смена статуса задачи.")
     public void Test_CreateTask() {
+        sleep(1000);
         openProject(PROJECT_NAME_WITH_CODE);
         clickTasks();
         newTaskWithDialogue();
         setTaskType("Ошибка");
         setTaskName(TASK_NAME);
-        setTaskDescription("Описание задачи.");
+        setTaskDescription("Помогите, я все уронил!");
         setTaskFixInVersion2();
-        setTaskEnvironment("Описание окружения.");
+        setTaskEnvironment("Google Chrome Версия 117.0.5938.89 (Официальная сборка), (64 бит).");
+        setTaskMark("Метка");
+        setTaskPriority("Highest");
         setTaskAffectedVersion2();
         setConnectedTask("TEST-21967");
+        setappointButton();
         acceptAndCreateTask();
         searchTask(getTaskTestNumber(TASK_NAME));
+
 
         Assertions.assertEquals("СДЕЛАТЬ", getTaskStatus(), "Статус не равен 'Сделать'.");
 
