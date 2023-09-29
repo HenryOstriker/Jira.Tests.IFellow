@@ -1,6 +1,6 @@
-package PageObject.PageSteps;
+package pageObject.pageSteps;
 
-import static PageObject.PageElements.LogInElements.*;
+import static pageObject.pageElements.LogInElements.*;
 
 public final class LogInElementsSteps {
     public void authorization(String login, String password) {

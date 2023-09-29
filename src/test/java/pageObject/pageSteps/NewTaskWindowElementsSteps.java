@@ -1,6 +1,9 @@
-package PageObject.PageSteps;
+package pageObject.pageSteps;
 
-import static PageObject.PageElements.NewTaskWindowElements.*;
+import io.cucumber.java.ru.И;
+import io.cucumber.java.ru.Когда;
+
+import static pageObject.pageElements.NewTaskWindowElements.*;
 import static com.codeborne.selenide.Selenide.actions;
 
 public final class NewTaskWindowElementsSteps {
@@ -44,8 +47,22 @@ public final class NewTaskWindowElementsSteps {
         taskConnected.sendKeys(task);
     }
     public static void setappointButton(){appointButton.click();}
-
+@И("Сохранить и создать задачу")
     public static void acceptAndCreateTask() {
         submitButton.click();
     }
+
+    @И("Заполнить поля задачи: {string}, {string}, {string}, {string}, {string}, {string}, {string}")
+    public static void setTaskFields(String taskType, String taskName, String taskDescription, String taskFixInVersion,
+                                     String taskEnvironment, String taskAffectedVersion, String connectedTask) {
+        setTaskType(taskType);
+        setTaskName(taskName);
+        setTaskDescription(taskDescription);
+        setTaskFixInVersion(taskFixInVersion);
+        setTaskEnvironment(taskEnvironment);
+        setTaskAffectedVersion(taskAffectedVersion);
+        setConnectedTask(connectedTask);
+    }
 }
+
+

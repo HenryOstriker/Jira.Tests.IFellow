@@ -1,8 +1,7 @@
 package hooks;
 
-import PageObject.PageSteps.HeaderElementsSteps;
-import PageObject.PageSteps.LogInElementsSteps;
-import com.codeborne.selenide.Configuration;
+import pageObject.pageSteps.HeaderElementsSteps;
+import pageObject.pageSteps.LogInElementsSteps;
 import com.codeborne.selenide.Selenide;
 import com.codeborne.selenide.WebDriverRunner;
 import org.junit.jupiter.api.*;
