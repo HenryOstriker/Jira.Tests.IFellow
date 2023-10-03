@@ -1,7 +1,5 @@
 package API.steps;
 
-import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import org.json.JSONObject;
@@ -22,7 +20,6 @@ public final class ReqResSteps extends BaseTestSteps {
                 .put("job", getConfigurationValue("job"));
     }
 
-    @When("Создание запроса на регистрацию нового пользователя")
     @Step("Отправка GET запроса на регистрацию нового пользователя")
     public static void createUser() {
         response = specWithoutAuth(reqRes)
@@ -30,7 +27,7 @@ public final class ReqResSteps extends BaseTestSteps {
                 .post(REQRES_CREATE_USER);
     }
 
-    @Then("Проверка, что полученный ответ имеет валидные данные в JSON")
+    @Step("Полученный ответ имеет валидные данные в JSON")
     public static void checkResponseIsValid() {
         checkStatusCode(201, response.getStatusCode());
         checkJsonFieldIsPresent(response, "name");

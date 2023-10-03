@@ -38,7 +38,7 @@ public final class RickAndMortySteps {
         characterLocation = getValueOfField("results[0].location.name");
     }
 
-    @And("Получаем последний эпизод, в котором появлялся персонаж")
+    @Step("Получаем последний эпизод, в котором появлялся персонаж")
     public static void getLastEpisode() {
         lastEpisode = getValueOfField("results[0].episode[-1]");
     }
@@ -58,8 +58,8 @@ public final class RickAndMortySteps {
         lastCharacterLocation = getValueOfField("location.name");
     }
 
-    @When("Создание запроса для получения данных о персонаже")
-    @Step("Отправка GET запроса с помощью queryParam для получения данных о персонаже")
+
+    @Step("GET запрос с помощью queryParam для получения данных о персонаже")
     public static void getCharacterData() {
         response = specWithoutAuth(rickAndMorty)
                 .queryParam(getConfigurationValue("queryName"), getConfigurationValue("queryObjects"))
@@ -74,16 +74,16 @@ public final class RickAndMortySteps {
                 .get(url);
     }
 
-    @Then("Создание запроса на получение данных о последнем персонаже в эпизоде")
-    @Step("Отправка запроса на получение последнего персонажа в эпизоде")
+
+    @Step("Запрос на получение последнего персонажа в эпизоде")
     public static void getLastCharacterInEpisode() {
         response = getWithoutAuth(rickAndMorty, lastEpisode);
 
         getLastCharacterUrl();
     }
 
-    @And("Создание запроса для получения данных по последнему персонажу")
-    @Step("Отправка запроса на получение данных по указанному персонажу")
+
+    @Step("Запрос на получение данных по указанному персонажу")
     public static void getLastCharacterData() {
         response = getWithoutAuth(rickAndMorty, lastCharacterUrl);
 
@@ -91,12 +91,12 @@ public final class RickAndMortySteps {
         getLastCharacterLocation();
     }
 
-    @And("Проверить расу персонажей")
+    @Step("Проверить расу персонажей")
     public static void checkBothSpeciesAreEqual() {
         checkSpeciesAreEqual(characterSpecies, lastCharacterSpecies);
     }
 
-    @And("Проверить местонахождение персонажей")
+    @Step("Проверить местонахождение персонажей")
     public static void checkBothOnSameLocation() {
         checkOnSameLocation(characterLocation, lastCharacterLocation);
     }
