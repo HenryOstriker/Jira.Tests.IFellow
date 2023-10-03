@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
+
 public abstract class Configuration {
-    private static final String CONFIGURATION_FILE = "/test.properties";
+    private static final String CONFIGURATION_FILE = "/application.properties";
     private static final Properties properties;
 
     static {
